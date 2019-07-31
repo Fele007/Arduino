@@ -12,7 +12,6 @@ void setup() {
 	int segmentPins[] = { A, B, C, D, E, F, G, DP };
 	segments = new Segments(displayPins, segmentPins);
 	segments->setCountdown(10);
-	Serial.println("Du Doofie");
 }
 
 void loop() {
