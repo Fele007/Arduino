@@ -1,6 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
-
+#include <Arduino.h>
 // LEDs
 
 
@@ -25,5 +25,10 @@
 
 // Buzzer
 #define BUZZER 0
+
+// Register
+#define SH_CP 53
+#define ST_CP 51
+#define DS 49
 
 #endif

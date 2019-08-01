@@ -57,6 +57,10 @@ void Segments::updateCountdown() {
 	}
 }
 
+void Segments::timerEvent() {
+	renderDisplay();
+}
+
 void Segments::renderDigit(int digit) {
 	switch (digit) {
 	case 0:

@@ -2,8 +2,9 @@
 #define SEGMENTS_H
 
 #include <Arduino.h>
+#include "ITimer.h"
 
-class Segments {
+class Segments : public ITimer {
 
 public:
 	// Constructor
@@ -11,7 +12,7 @@ public:
 	// Methods
 	void renderDisplay();
 	void setCountdown(int start);
-
+	void timerEvent();
 
 private:
 	// General

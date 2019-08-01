@@ -12,8 +12,11 @@ endif
 PROJECT_OBJS = \
 	project/Alarmanlage.cpp.o \
 	project/Blinker.cpp.o \
+	project/Info.cpp.o \
 	project/Matrix.cpp.o \
 	project/Segments.cpp.o \
+	project/ShiftRegister.cpp.o \
+	project/TimerBank.cpp.o \
 
 PLATFORM_CORE_OBJS = \
 	core/abi.cpp.o \
@@ -82,6 +85,14 @@ project/Blinker.cpp.d: ;
 
 -include project/Blinker.cpp.d 
 
+project/Info.cpp.o: ../../Info.cpp project/Info.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"C:/Users/felix/.arduinocdt/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR   -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino" -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega" "$<" -o "$@"
+
+project/Info.cpp.d: ;
+
+-include project/Info.cpp.d 
+
 project/Matrix.cpp.o: ../../Matrix.cpp project/Matrix.cpp.d
 	@$(call mymkdir,$(dir $@))
 	"C:/Users/felix/.arduinocdt/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR   -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino" -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega" "$<" -o "$@"
@@ -97,6 +108,22 @@ project/Segments.cpp.o: ../../Segments.cpp project/Segments.cpp.d
 project/Segments.cpp.d: ;
 
 -include project/Segments.cpp.d 
+
+project/ShiftRegister.cpp.o: ../../ShiftRegister.cpp project/ShiftRegister.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"C:/Users/felix/.arduinocdt/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR   -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino" -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega" "$<" -o "$@"
+
+project/ShiftRegister.cpp.d: ;
+
+-include project/ShiftRegister.cpp.d 
+
+project/TimerBank.cpp.o: ../../TimerBank.cpp project/TimerBank.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"C:/Users/felix/.arduinocdt/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR   -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino" -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega" "$<" -o "$@"
+
+project/TimerBank.cpp.d: ;
+
+-include project/TimerBank.cpp.d 
 
 
 core/abi.cpp.o: C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/abi.cpp core/abi.cpp.d
