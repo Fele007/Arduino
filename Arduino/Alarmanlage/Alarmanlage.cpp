@@ -1,44 +1,36 @@
-#include <Arduino.h>
+#include "Globals.h"
 #include "Blinker.h"
 #include "Matrix.h"
-#include "Globals.h"
 #include "Segments.h"
 #include "TimerBank.h"
 #include "Info.h"
 #include "ShiftRegister.h"
+#include "RFID.h"
 
-Segments *segments;
-TimerBank *tb;
-Info *info;
-ShiftRegister *shiftRegister;
+int displayPins[] = { D1, D2, D3, D4 };
+int segmentPins[] = { A, B, C, D, E, F, G, DP };
+
+Segments segments (displayPins, segmentPins);
+TimerBank tb(2);
+ShiftRegister shiftRegister;
+RFID rfid;
 
 void setup() {
-	//Serial.begin(9600);
-	int displayPins[] = { D1, D2, D3, D4 };
-	int segmentPins[] = { A, B, C, D, E, F, G, DP };
+	// Communication
+	Serial.begin(9600);
+	SPI.begin();
 
-	//segments = new Segments(displayPins, segmentPins);
-	//segments->setCountdown(10);
+	// Shift Register
+	shiftRegister.setState(0b00000000);
 
-	//tb = new TimerBank(2);
-	//tb->registerProcess(segments, 5.0f);
+	// Segmentanzeige++++++++++++++++++++++++++++++++++++++++++
+	segments.setCountdown(10);
 
-	shiftRegister = new ShiftRegister();
-
+	// Timer+++++++++++++++++++++++++++++++++++++++++++++++++++
+	tb.registerProcess(&segments, 5.0f);
+	tb.registerProcess(&rfid, 1000.0f);
 }
 
 void loop() {
-	//tb->run();
-	for (int i = 0; i < 100; i++) {
-		shiftRegister->setState(0b00100010);
-		delay(700);
-		shiftRegister->setState(0b00100000);
-		delay(700);
-		shiftRegister->setState(0);
-		delay(700);
-		shiftRegister->setState(0b00000010);
-		delay(700);
-		shiftRegister->setState(0);
-		delay(700);
-	}
+	tb.run();
 }

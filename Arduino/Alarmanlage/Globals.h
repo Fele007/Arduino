@@ -1,6 +1,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 #include <Arduino.h>
+#include <SPI.h>
 // LEDs
 
 
@@ -27,8 +28,11 @@
 #define BUZZER 0
 
 // Register
-#define SH_CP 53
-#define ST_CP 51
-#define DS 49
+#define SH_CP 37
+#define ST_CP 35
+#define DS 33
 
+// SPI
+#define CS_RFID 53
+#define RST_RFID 31
 #endif

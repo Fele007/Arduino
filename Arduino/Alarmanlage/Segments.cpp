@@ -1,5 +1,5 @@
 #include "Segments.h"
-#include <Arduino.h>
+#include "Globals.h"
 
 Segments::Segments(int displayPins[4], int segmentPins[8]) :
 		displayPins(displayPins), segmentPins(segmentPins) {
