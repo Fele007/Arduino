@@ -10,8 +10,10 @@
 int displayPins[] = { D1, D2, D3, D4 };
 int segmentPins[] = { A, B, C, D, E, F, G, DP };
 
+extern TimerBank tb(2); // Wohin soll das??
+
 Segments segments (displayPins, segmentPins);
-TimerBank tb(2);
+
 ShiftRegister shiftRegister;
 RFID rfid;
 

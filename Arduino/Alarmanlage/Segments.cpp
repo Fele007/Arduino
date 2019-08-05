@@ -21,7 +21,7 @@ void Segments::renderDisplay() {
 		}
 		digitalWrite(displayPins[i - 1], LOW);
 		renderDigit(digits[i - 1]);
-		delay(2);
+		delay(1);
 		digitalWrite(displayPins[i - 1], HIGH);
 	}
 }
@@ -44,13 +44,12 @@ void Segments::updateSources() {
 }
 
 void Segments::updateCountdown() {
-	int i = number;
-	if (i > 0 & i <= 9999) {
-		int temp = i;
+	if (number > 0 & number <= 9999) {
+		int temp = number;
 		numberLength = 0;
 		while (0 < temp) {
 			digits[numberLength] = temp % 10;
-			temp = temp / 10;
+			temp /= 10;
 			numberLength++;
 		}
 		number--;

@@ -16,10 +16,13 @@ public:
 	virtual ~TimerBank();
 	void registerProcess(ITimer* process, float cycle);
 	void run();
+	void offerInterrupt(ITimer* process);
 private:
 	ITimer** processes;
 	int processCount;
 	int currentProcess = 0;
 };
+
+
 
 #endif /* TIMERBANK_H_ */

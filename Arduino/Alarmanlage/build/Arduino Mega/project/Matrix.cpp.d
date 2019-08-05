@@ -11,4 +11,5 @@ project/Matrix.cpp.o: ../../Matrix.cpp ../../Matrix.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/Arduino.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega/pins_arduino.h \
  ../../Globals.h \
- C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/libraries/SPI/src/SPI.h
+ C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/libraries/SPI/src/SPI.h \
+ ../../TimerBank.h ../../ITimer.h

@@ -6,6 +6,7 @@
  */
 
 #include "RFID.h"
+#include "Globals.h"
 
 RFID::RFID() {
 	device = MFRC522(CS_RFID, RST_RFID);
@@ -22,6 +23,7 @@ void RFID::timerEvent() {
 		      // Abstand zwischen HEX-Zahlen und führende Null bei Byte < 16
 		      Serial.print(device.uid.uidByte[i] < 0x10 ? " 0" : " ");
 		      Serial.print(device.uid.uidByte[i], HEX);
+		      tb.offerInterrupt(this);
 		    }
 		    Serial.println();
 		    // Versetzt die gelesene Karte in einen Ruhemodus, um nach anderen Karten suchen zu können.

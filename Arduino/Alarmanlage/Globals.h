@@ -2,6 +2,7 @@
 #define GLOBALS_H
 #include <Arduino.h>
 #include <SPI.h>
+#include "TimerBank.h"
 // LEDs
 
 
