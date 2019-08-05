@@ -7,6 +7,7 @@
 
 #ifndef TIMERBANK_H_
 #define TIMERBANK_H_
+#include "Globals.h"
 #include "ITimer.h"
 
 
@@ -19,10 +20,11 @@ public:
 	void offerInterrupt(ITimer* process);
 private:
 	ITimer** processes;
+	unsigned char workingProcess;
 	int processCount;
 	int currentProcess = 0;
 };
 
-
+extern TimerBank tb;
 
 #endif /* TIMERBANK_H_ */

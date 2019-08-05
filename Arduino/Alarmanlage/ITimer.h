@@ -7,7 +7,6 @@
 
 #ifndef ITIMER_H_
 #define ITIMER_H_
-#include <Arduino.h>
 
 class ITimer {
 public:

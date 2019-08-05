@@ -2,7 +2,6 @@
 #define GLOBALS_H
 #include <Arduino.h>
 #include <SPI.h>
-#include "TimerBank.h"
 // LEDs
 
 
@@ -33,7 +32,7 @@
 #define ST_CP 35
 #define DS 33
 
-// SPI
-#define CS_RFID 53
+// RFID
+#define CS_RFID 49
 #define RST_RFID 31
 #endif

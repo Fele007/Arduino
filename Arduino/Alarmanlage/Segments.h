@@ -1,8 +1,7 @@
 #ifndef SEGMENTS_H
 #define SEGMENTS_H
 
-#include <Arduino.h>
-#include "ITimer.h"
+#include "TimerBank.h"
 
 class Segments : public ITimer {
 

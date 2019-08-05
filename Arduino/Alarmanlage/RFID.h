@@ -9,17 +9,20 @@
 #define RFID_H_
 #include <mfrc522.h>
 #include "Globals.h"
-#include "ITimer.h"
+#include "TimerBank.h"
 
 class RFID : public ITimer {
 public:
 	RFID();
 	virtual ~RFID();
+	void init();
 	void timerEvent();
 
 private:
 	MFRC522 device;
-	MFRC522::Uid currentUid;
+	bool checkForCard();
+	void validateAction();
+	//MFRC522::Uid currentUid;
 };
 
 #endif /* RFID_H_ */
