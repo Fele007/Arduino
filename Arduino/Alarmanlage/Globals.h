@@ -25,7 +25,7 @@
 #define MatrixDIN 0
 
 // Buzzer
-#define BUZZER 0
+#define BUZZER 40
 
 // Register
 #define SH_CP 37

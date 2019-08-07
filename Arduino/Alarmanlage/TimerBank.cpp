@@ -7,21 +7,26 @@
 
 #include "TimerBank.h"
 
-TimerBank::TimerBank(int maxProcessCount) :
-		processCount(maxProcessCount) {
+void TimerBankClass::init(int maxProcessCount) {
+	processCount = maxProcessCount;
 	processes = new ITimer*[maxProcessCount];
 }
 
-TimerBank::~TimerBank() {
+TimerBankClass::~TimerBankClass() {
 	delete[] processes;
 }
 
-void TimerBank::registerProcess(ITimer *process, float cycle) {
-	process->cycleTime = cycle;
-	processes[currentProcess++] = process;
+void TimerBankClass::registerProcess(ITimer *process, float cycle) {
+	if (currentProcess+1 <= processCount) {
+		process->cycleTime = cycle;
+		processes[currentProcess++] = process;
+		process->timerEvent();
+	}
 }
 
-void TimerBank::run() {
+
+
+void TimerBankClass::run() {
 	unsigned long currentTime = millis();
 	for (int i = 0; i < currentProcess; i++) {
 		if ((currentTime - processes[i]->lastCycle) > processes[i]->cycleTime) {
@@ -32,7 +37,7 @@ void TimerBank::run() {
 	}
 }
 
-void TimerBank::offerInterrupt(ITimer *process) {
+void TimerBankClass::offerInterrupt(ITimer *process) {
 	unsigned long currentTime = millis();
 	for (int i = 0; i < workingProcess; i++) {
 		if ((currentTime - processes[i]->lastCycle) > processes[i]->cycleTime) {
@@ -42,4 +47,4 @@ void TimerBank::offerInterrupt(ITimer *process) {
 	}
 }
 
-TimerBank tb(2);
+TimerBankClass TimerBank;

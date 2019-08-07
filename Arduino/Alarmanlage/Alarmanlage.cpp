@@ -6,6 +6,8 @@
 #include "ShiftRegister.h"
 #include "RFID.h"
 #include "TimerBank.h"
+#include "Buzzer.h"
+#include "Alarmanlage.h"
 
 int displayPins[] = { D1, D2, D3, D4 };
 int segmentPins[] = { A, B, C, D, E, F, G, DP };
@@ -13,12 +15,16 @@ int segmentPins[] = { A, B, C, D, E, F, G, DP };
 Segments segments (displayPins, segmentPins);
 ShiftRegister shiftRegister;
 RFID rfid(&segments);
+Buzzer buzzer(BUZZER);
+
+static Alarmanlage::state Alarmanlage::currentState = Alarmanlage::state::LOCKED;
 
 void setup() {
-	// Communication
+	// Initialization
 	Serial.begin(9600);
 	SPI.begin();
 	rfid.init();
+	TimerBank.init(3);
 
 	// Shift Register
 	shiftRegister.setState(0b00000000);
@@ -27,10 +33,16 @@ void setup() {
 	segments.setCountdown(10);
 
 	// Timer+++++++++++++++++++++++++++++++++++++++++++++++++++
-	tb.registerProcess(&segments, 5.0f);
-	tb.registerProcess(&rfid, 1000.0f);
+	TimerBank.registerProcess(&segments, 5.0f);
+	TimerBank.registerProcess(&rfid, 1000.0f);
 }
 
 void loop() {
-	tb.run();
+	TimerBank.run();
+	if (Alarmanlage::currentState == Alarmanlage::state::ALERT) {
+		TimerBank.registerProcess(&buzzer, 500.0f);
+	}
+
 }
+
+

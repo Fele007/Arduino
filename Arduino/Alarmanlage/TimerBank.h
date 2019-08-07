@@ -11,13 +11,13 @@
 #include "ITimer.h"
 
 
-class TimerBank {
+class TimerBankClass {
 public:
-	TimerBank(int maxProcessCount);
-	virtual ~TimerBank();
+	virtual ~TimerBankClass();
 	void registerProcess(ITimer* process, float cycle);
 	void run();
 	void offerInterrupt(ITimer* process);
+	void init (int maxProcessCount);
 private:
 	ITimer** processes;
 	unsigned char workingProcess;
@@ -25,6 +25,6 @@ private:
 	int currentProcess = 0;
 };
 
-extern TimerBank tb;
+extern TimerBankClass TimerBank;
 
 #endif /* TIMERBANK_H_ */

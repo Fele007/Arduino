@@ -35,6 +35,7 @@ void RFID::validateAction() {
 	switch (key) {
 	case 0xCD49DAD9:
 		pISecurable->unlock();
+		Alarmanlage::currentState=Alarmanlage::state::UNLOCKED;
 		break;
 	}
 }

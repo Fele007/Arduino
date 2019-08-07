@@ -12,6 +12,7 @@ endif
 PROJECT_OBJS = \
 	project/Alarmanlage.cpp.o \
 	project/Blinker.cpp.o \
+	project/Buzzer.cpp.o \
 	project/Info.cpp.o \
 	project/Matrix.cpp.o \
 	project/RFID.cpp.o \
@@ -88,6 +89,14 @@ project/Blinker.cpp.o: ../../Blinker.cpp project/Blinker.cpp.d
 project/Blinker.cpp.d: ;
 
 -include project/Blinker.cpp.d 
+
+project/Buzzer.cpp.o: ../../Buzzer.cpp project/Buzzer.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"C:/Users/felix/.arduinocdt/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR   -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino" -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega" -I"C:/Users/felix/.arduinocdt/libraries/MFRC522/1.4.4/src" -I"C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/libraries/SPI/src" "$<" -o "$@"
+
+project/Buzzer.cpp.d: ;
+
+-include project/Buzzer.cpp.d 
 
 project/Info.cpp.o: ../../Info.cpp project/Info.cpp.d
 	@$(call mymkdir,$(dir $@))

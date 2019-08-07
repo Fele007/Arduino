@@ -9,8 +9,9 @@
 #define RFID_H_
 #include <mfrc522.h>
 #include "Globals.h"
-#include "TimerBank.h"
 #include "ISecurable.h"
+#include "TimerBank.h"
+#include "Alarmanlage.h"
 
 class RFID : public ITimer {
 public:

@@ -1,8 +1,8 @@
 #ifndef SEGMENTS_H
 #define SEGMENTS_H
 
-#include "TimerBank.h"
 #include "ISecurable.h"
+#include "TimerBank.h"
 
 class Segments : public ITimer, public ISecurable {
 
