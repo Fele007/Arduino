@@ -2,8 +2,9 @@
 #define SEGMENTS_H
 
 #include "TimerBank.h"
+#include "ISecurable.h"
 
-class Segments : public ITimer {
+class Segments : public ITimer, public ISecurable {
 
 public:
 	// Constructor
@@ -12,6 +13,7 @@ public:
 	void renderDisplay();
 	void setCountdown(int start);
 	void timerEvent();
+	void unlock();
 
 private:
 	// General
@@ -23,6 +25,7 @@ private:
 	bool countdown_running = false;
 	int countdownLength = 0;
 	unsigned long countdownTimer;
+	void stopCountdown();
 	// Timing
 	void updateSources();
 	void updateCountdown();

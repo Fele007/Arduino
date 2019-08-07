@@ -60,6 +60,14 @@ void Segments::timerEvent() {
 	renderDisplay();
 }
 
+void Segments::stopCountdown() {
+	countdown_running = false;
+}
+
+void Segments::unlock() {
+	stopCountdown();
+}
+
 void Segments::renderDigit(int digit) {
 	switch (digit) {
 	case 0:

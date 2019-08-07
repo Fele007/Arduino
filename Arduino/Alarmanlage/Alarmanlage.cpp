@@ -12,7 +12,7 @@ int segmentPins[] = { A, B, C, D, E, F, G, DP };
 
 Segments segments (displayPins, segmentPins);
 ShiftRegister shiftRegister;
-RFID rfid;
+RFID rfid(&segments);
 
 void setup() {
 	// Communication

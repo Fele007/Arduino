@@ -10,10 +10,11 @@
 #include <mfrc522.h>
 #include "Globals.h"
 #include "TimerBank.h"
+#include "ISecurable.h"
 
 class RFID : public ITimer {
 public:
-	RFID();
+	RFID(ISecurable* pISecurable...);
 	virtual ~RFID();
 	void init();
 	void timerEvent();
@@ -22,7 +23,7 @@ private:
 	MFRC522 device;
 	bool checkForCard();
 	void validateAction();
-	//MFRC522::Uid currentUid;
+	ISecurable* pISecurable;
 };
 
 #endif /* RFID_H_ */

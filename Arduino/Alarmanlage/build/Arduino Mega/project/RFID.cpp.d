@@ -14,4 +14,4 @@ project/RFID.cpp.o: ../../RFID.cpp ../../RFID.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/Arduino.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega/pins_arduino.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/libraries/SPI/src/SPI.h \
- ../../Globals.h ../../TimerBank.h ../../ITimer.h
+ ../../Globals.h ../../TimerBank.h ../../ITimer.h ../../ISecurable.h

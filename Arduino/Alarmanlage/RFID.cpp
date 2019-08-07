@@ -7,7 +7,7 @@
 
 #include "RFID.h"
 
-RFID::RFID() {
+RFID::RFID(ISecurable* pISecurable...) : pISecurable(pISecurable) {
 	device = MFRC522(CS_RFID, RST_RFID);
 }
 
@@ -20,13 +20,6 @@ void RFID::init() {
 
 bool RFID::checkForCard() {
 	if (device.PICC_IsNewCardPresent() && device.PICC_ReadCardSerial()) {
-		Serial.print("Gelesene UID:");
-		for (byte i = 0; i < device.uid.size; i++) {
-			// Abstand zwischen HEX-Zahlen und führende Null bei Byte < 16
-			Serial.print(device.uid.uidByte[i] < 0x10 ? " 0" : " ");
-			Serial.print(device.uid.uidByte[i], HEX);
-		}
-		Serial.println();
 		// Versetzt die gelesene Karte in einen Ruhemodus, um nach anderen Karten suchen zu können.
 		device.PICC_HaltA();
 		return true;
@@ -35,12 +28,15 @@ bool RFID::checkForCard() {
 }
 
 void RFID::validateAction() {
-	int key = 0b0;
+	unsigned long key = 0b100000000000000000000000000000000L;
 	for (byte i = 0; i < device.uid.size; i++) {
-		key |= device.uid.uidByte[i] << 8*(device.uid.size-1-i);
-		Serial.println(key, BIN);
+		key |= ((unsigned long) device.uid.uidByte[i]) << 8*(device.uid.size-1-i);
 	}
-	Serial.println(key, BIN);
+	switch (key) {
+	case 0xCD49DAD9:
+		pISecurable->unlock();
+		break;
+	}
 }
 
 void RFID::timerEvent() {
@@ -49,4 +45,5 @@ void RFID::timerEvent() {
 	}
 
 }
-
+//10100000111101000010110110100101
+//10000011110100001011011010010100
