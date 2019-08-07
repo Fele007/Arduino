@@ -7,28 +7,27 @@
 
 #include "TimerBank.h"
 
-void TimerBankClass::init(int maxProcessCount) {
-	processCount = maxProcessCount;
-	processes = new ITimer*[maxProcessCount];
-}
-
 TimerBankClass::~TimerBankClass() {
 	delete[] processes;
 }
 
 void TimerBankClass::registerProcess(ITimer *process, float cycle) {
-	if (currentProcess+1 <= processCount) {
 		process->cycleTime = cycle;
-		processes[currentProcess++] = process;
-		process->timerEvent();
-	}
+		processes[currentProcesses] = process;
+		currentProcesses++;
 }
 
+void TimerBankClass::registerProcess(ITimer *process, float cycle, boolean startNow) {
+		process->cycleTime = cycle;
+		processes[currentProcesses] = process;
+		currentProcesses++;
+		if (startNow) process->timerEvent();
+}
 
 
 void TimerBankClass::run() {
 	unsigned long currentTime = millis();
-	for (int i = 0; i < currentProcess; i++) {
+	for (int i = 0; i < currentProcesses; i++) {
 		if ((currentTime - processes[i]->lastCycle) > processes[i]->cycleTime) {
 			workingProcess = i;
 			processes[i]->timerEvent();

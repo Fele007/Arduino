@@ -15,14 +15,13 @@ class TimerBankClass {
 public:
 	virtual ~TimerBankClass();
 	void registerProcess(ITimer* process, float cycle);
+	void registerProcess(ITimer* process, float cycle, boolean startNow);
 	void run();
 	void offerInterrupt(ITimer* process);
-	void init (int maxProcessCount);
 private:
-	ITimer** processes;
-	unsigned char workingProcess;
-	int processCount;
-	int currentProcess = 0;
+	ITimer* processes[];
+	unsigned char workingProcess=0;
+	unsigned char currentProcesses = 0;
 };
 
 extern TimerBankClass TimerBank;

@@ -24,7 +24,6 @@ void setup() {
 	Serial.begin(9600);
 	SPI.begin();
 	rfid.init();
-	TimerBank.init(3);
 
 	// Shift Register
 	shiftRegister.setState(0b00000000);
@@ -38,9 +37,9 @@ void setup() {
 }
 
 void loop() {
-	TimerBank.run();
+	//TimerBank.run();
 	if (Alarmanlage::currentState == Alarmanlage::state::ALERT) {
-		TimerBank.registerProcess(&buzzer, 500.0f);
+		TimerBank.registerProcess(&buzzer, 500.0f, true);
 	}
 
 }
