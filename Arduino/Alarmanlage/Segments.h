@@ -3,6 +3,7 @@
 
 #include "ISecurable.h"
 #include "TimerBank.h"
+#include "Alarmanlage.h"
 
 class Segments : public ITimer, public ISecurable {
 
@@ -12,7 +13,7 @@ public:
 	// Methods
 	void renderDisplay();
 	void setCountdown(int start);
-	void timerEvent();
+
 
 protected:
 	void unlock();
@@ -33,6 +34,7 @@ private:
 	void updateCountdown();
 	// Helpers
 	void renderDigit(int digit);
+	void timerEvent();
 
 };
 

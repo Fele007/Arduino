@@ -18,7 +18,6 @@ public:
 	RFID(ISecurable* pISecurable...);
 	virtual ~RFID();
 	void init();
-	void timerEvent();
 
 private:
 	MFRC522 device;
@@ -26,6 +25,7 @@ private:
 	void validateAction();
 	ISecurable* pISecurable;
 	bool manipulation = false;
+	void timerEvent();
 };
 
 #endif /* RFID_H_ */

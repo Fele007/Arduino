@@ -1,5 +1,4 @@
-project/Segments.cpp.o: ../../Segments.cpp ../../Segments.h \
- ../../ISecurable.h ../../TimerBank.h ../../Globals.h \
+project/Gyro.cpp.o: ../../Gyro.cpp ../../Gyro.h ../../Globals.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/Arduino.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/binary.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/WCharacter.h \
@@ -12,4 +11,8 @@ project/Segments.cpp.o: ../../Segments.cpp ../../Segments.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/Arduino.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/variants/mega/pins_arduino.h \
  C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/libraries/SPI/src/SPI.h \
- ../../ITimer.h ../../Alarmanlage.h
+ ../../ITimer.h \
+ C:/Users/felix/.arduinocdt/libraries/TinyMPU6050/0.4.3/src/TinyMPU6050.h \
+ C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/libraries/Wire/src/Wire.h \
+ C:/Users/felix/.arduinocdt/packages/arduino/hardware/avr/1.6.23/cores/arduino/Stream.h \
+ ../../Alarmanlage.h

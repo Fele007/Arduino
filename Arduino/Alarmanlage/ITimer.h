@@ -13,7 +13,10 @@ public:
 	ITimer(){};
 	virtual ~ITimer(){};
 	float cycleTime=0.0f, lastCycle=0.0f;
+protected:
 	virtual void timerEvent() = 0;
+
+	friend class TimerBankClass;
 };
 
 #endif /* ITIMER_H_ */

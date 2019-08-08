@@ -31,6 +31,7 @@ void Segments::setCountdown(int start) {
 		countdown_running = true;
 		countdownLength = number = start;
 		countdownTimer = millis();
+		numberLength=0;
 		while (start > 0) {
 			numberLength++;
 			start = start / 10;
@@ -46,7 +47,7 @@ void Segments::updateSources() {
 }
 
 void Segments::updateCountdown() {
-	if (number > 0 & number <= 9999) {
+	if (number >= 0 & number <= 9999) {
 		int temp = number;
 		numberLength = 0;
 		while (0 < temp) {
@@ -56,10 +57,15 @@ void Segments::updateCountdown() {
 		}
 		number--;
 	}
+	if (number==0) {
+		Alarmanlage::currentState = Alarmanlage::state::ALERT;
+	}
 }
 
 void Segments::timerEvent() {
-	renderDisplay();
+	if (countdown_running & Alarmanlage::currentState == Alarmanlage::state::DETECTED) {
+		renderDisplay();
+	}
 }
 
 void Segments::stopCountdown() {

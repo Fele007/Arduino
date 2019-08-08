@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-libraries=["MFRC522",{"package"\:"arduino","platform"\:"avr","library"\:"SPI"}]
+libraries=["MFRC522",{"package"\:"arduino","platform"\:"avr","library"\:"Wire"},{"package"\:"arduino","platform"\:"avr","library"\:"SPI"},"TinyMPU6050"]

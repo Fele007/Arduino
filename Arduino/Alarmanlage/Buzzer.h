@@ -15,11 +15,11 @@ public:
 	Buzzer(int pin);
 	void buzz();
 	virtual ~Buzzer();
-	void timerEvent();
 private:
 	int pin;
 	unsigned char songIndex=0;
 	int song [4] = {440, 1000, 440 ,700};
+	void timerEvent();
 };
 
 #endif /* BUZZER_H_ */
