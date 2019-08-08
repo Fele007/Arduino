@@ -32,7 +32,7 @@ bool Gyro::checkMovement() {
 	device.Execute();
 	float accX = device.GetAccX();
 	float accY = device.GetAccY();
-	if (accX > 0.05 | accX < -0.05 | accY > 0.05 | accY < -0.05) {
+	if (accX > 0.04 | accX < -0.04 | accY > 0.04 | accY < -0.04) {
 		return true;
 	}
 	return false;
