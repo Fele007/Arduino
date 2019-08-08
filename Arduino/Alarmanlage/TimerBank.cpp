@@ -22,6 +22,8 @@ void TimerBankClass::registerProcess(ITimer *process, float cycle) {
 		processes[currentProcess++] = process;
 		process->timerEvent();
 	}
+	else
+	Serial.println("TimerBank full");
 }
 
 

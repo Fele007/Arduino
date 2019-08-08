@@ -27,12 +27,14 @@ void Segments::renderDisplay() {
 }
 
 void Segments::setCountdown(int start) {
-	countdown_running = true;
-	countdownLength = number = start;
-	countdownTimer = millis();
-	while (start > 0) {
-		numberLength++;
-		start = start / 10;
+	if (!countdown_running) {
+		countdown_running = true;
+		countdownLength = number = start;
+		countdownTimer = millis();
+		while (start > 0) {
+			numberLength++;
+			start = start / 10;
+		}
 	}
 }
 

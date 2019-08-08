@@ -13,6 +13,8 @@ public:
 	void renderDisplay();
 	void setCountdown(int start);
 	void timerEvent();
+
+protected:
 	void unlock();
 
 private:

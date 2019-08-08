@@ -12,7 +12,7 @@
 int displayPins[] = { D1, D2, D3, D4 };
 int segmentPins[] = { A, B, C, D, E, F, G, DP };
 
-Segments segments (displayPins, segmentPins);
+Segments segments(displayPins, segmentPins);
 ShiftRegister shiftRegister;
 RFID rfid(&segments);
 Buzzer buzzer(BUZZER);
@@ -27,10 +27,7 @@ void setup() {
 	TimerBank.init(3);
 
 	// Shift Register
-	shiftRegister.setState(0b00000000);
-
-	// Segmentanzeige++++++++++++++++++++++++++++++++++++++++++
-	segments.setCountdown(10);
+	shiftRegister.setState(0b00000010);
 
 	// Timer+++++++++++++++++++++++++++++++++++++++++++++++++++
 	TimerBank.registerProcess(&segments, 5.0f);
@@ -41,8 +38,16 @@ void loop() {
 	TimerBank.run();
 	if (Alarmanlage::currentState == Alarmanlage::state::ALERT) {
 		TimerBank.registerProcess(&buzzer, 500.0f);
+		shiftRegister.setState(0b00000010);
+	} else if (Alarmanlage::currentState == Alarmanlage::state::UNLOCKED) {
+		shiftRegister.setState(0b00100000);
+		rfid.init();
+	} else if (Alarmanlage::currentState == Alarmanlage::state::LOCKED) {
+		shiftRegister.setState(0b00000000);
+	} else if (Alarmanlage::currentState == Alarmanlage::state::DETECTED) {
+		segments.setCountdown(10);
+		shiftRegister.setState(0b00000010);
 	}
 
 }
-
 

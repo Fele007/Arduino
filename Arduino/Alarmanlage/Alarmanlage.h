@@ -10,7 +10,7 @@
 
 class Alarmanlage {
 public:
-	enum state {LOCKED, UNLOCKED, ALERT};
+	enum state {LOCKED, UNLOCKED, DETECTED, ALERT};
 	static state currentState;
 };
 

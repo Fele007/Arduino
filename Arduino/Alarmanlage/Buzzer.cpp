@@ -16,8 +16,8 @@ Buzzer::~Buzzer() {
 }
 
 void Buzzer::buzz() {
-	if (songIndex>3) {
-		songIndex=0;
+	if (songIndex > 3) {
+		songIndex = 0;
 	}
 	tone(pin, song[songIndex++]);
 }

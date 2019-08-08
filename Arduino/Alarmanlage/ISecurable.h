@@ -9,8 +9,10 @@
 #define ISECURABLE_H_
 
 class ISecurable {
-public:
+protected:
 	virtual void unlock() = 0;
+
+	friend class RFID;
 };
 
 

@@ -25,6 +25,7 @@ private:
 	bool checkForCard();
 	void validateAction();
 	ISecurable* pISecurable;
+	bool manipulation = false;
 };
 
 #endif /* RFID_H_ */
