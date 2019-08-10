@@ -26,14 +26,14 @@ void setup() {
 	Serial.begin(9600);
 	SPI.begin();
 	rfid.init();
-	TimerBank.init(4);
+	TimerBank.init(10);
 
 	// Shift Register
 	shiftRegister.setState(0b00000010);
 
 	// Timer+++++++++++++++++++++++++++++++++++++++++++++++++++
 	TimerBank.registerProcess(&segments, 5.0f);
-	TimerBank.registerProcess(&rfid, 1000.0f);
+	TimerBank.registerProcess(&rfid, 500.0f);
 	TimerBank.registerProcess(&gyro, 10.0f);
 }
 
@@ -45,12 +45,12 @@ void loop() {
 	} else if (Alarmanlage::currentState == Alarmanlage::state::UNLOCKED) {
 		shiftRegister.setState(0b00100000);
 		rfid.init();
+		TimerBank.deRegisterProcess(&buzzer);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::LOCKED) {
 		shiftRegister.setState(0b00000000);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::DETECTED) {
 		segments.setCountdown(10);
 		shiftRegister.setState(0b00000010);
 	}
-
 }
 

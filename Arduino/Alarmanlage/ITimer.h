@@ -15,6 +15,7 @@ public:
 	float cycleTime=0.0f, lastCycle=0.0f;
 protected:
 	virtual void timerEvent() = 0;
+	virtual void finalize() {};
 
 	friend class TimerBankClass;
 };

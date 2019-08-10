@@ -25,3 +25,7 @@ void Buzzer::buzz() {
 void Buzzer::timerEvent() {
 	buzz();
 }
+
+void Buzzer::finalize() {
+	noTone(pin);
+}

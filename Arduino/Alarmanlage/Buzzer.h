@@ -20,6 +20,7 @@ private:
 	unsigned char songIndex=0;
 	int song [4] = {440, 1000, 440 ,700};
 	void timerEvent();
+	void finalize();
 };
 
 #endif /* BUZZER_H_ */
