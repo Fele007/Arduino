@@ -13,6 +13,7 @@ public:
 	enum state {LOCKED, UNLOCKED, DETECTED, ALERT};
 	static volatile state currentState;
 	static void ISR_Motion();
+	static bool sleeping;
 };
 
 

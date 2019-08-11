@@ -9,6 +9,7 @@
 #include "Buzzer.h"
 #include "Alarmanlage.h"
 #include "Gyro.h"
+#include <avr/sleep.h>
 
 int displayPins[] = { D1, D2, D3, D4 };
 int segmentPins[] = { A, B, C, D, E, F, G, DP };
@@ -20,7 +21,7 @@ Buzzer buzzer(BUZZER);
 Gyro gyro;
 
 static volatile Alarmanlage::state Alarmanlage::currentState = Alarmanlage::state::LOCKED;
-
+static bool Alarmanlage::sleeping = false;
 
 void setup() {
 	// Initialization
@@ -36,29 +37,40 @@ void setup() {
 	// Timer+++++++++++++++++++++++++++++++++++++++++++++++++++
 	TimerBank.registerProcess(&segments, 3.0f);
 	TimerBank.registerProcess(&rfid, 400.0f);
-	attachInterrupt(digitalPinToInterrupt(INT_RFID), Alarmanlage::ISR_Motion, RISING);
 }
 
 void loop() {
 	TimerBank.run();
 	if (Alarmanlage::currentState == Alarmanlage::state::ALERT) {
+		detachInterrupt(digitalPinToInterrupt(INT_RFID));
 		TimerBank.registerProcess(&buzzer, 500.0f);
 		shiftRegister.setState(0b00000010);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::UNLOCKED) {
+		detachInterrupt(digitalPinToInterrupt(INT_RFID));
 		shiftRegister.setState(0b00100000);
 		rfid.reset();
 		TimerBank.deRegisterProcess(&buzzer);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::LOCKED) {
-		//TimerBank.registerProcess(&gyro, 10.0f);
 		shiftRegister.setState(0b00000000);
+		attachInterrupt(digitalPinToInterrupt(INT_RFID),
+				Alarmanlage::ISR_Motion, RISING);
+		if (!Alarmanlage::sleeping) {
+			Alarmanlage::sleeping=true;
+			set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+			sleep_enable();
+			sleep_mode();
+			sleep_disable();
+			Alarmanlage::sleeping=false;
+		}
 	} else if (Alarmanlage::currentState == Alarmanlage::state::DETECTED) {
+		detachInterrupt(digitalPinToInterrupt(INT_RFID));
 		segments.setCountdown(10);
 		shiftRegister.setState(0b00000010);
 	}
 }
 
-static void Alarmanlage::ISR_Motion () {
+static void Alarmanlage::ISR_Motion() {
 	if (Alarmanlage::currentState == Alarmanlage::state::LOCKED)
-	Alarmanlage::currentState = Alarmanlage::state::DETECTED;
+		Alarmanlage::currentState = Alarmanlage::state::DETECTED;
 }
 
