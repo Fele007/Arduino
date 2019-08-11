@@ -35,4 +35,5 @@
 // RFID
 #define CS_RFID 49
 #define RST_RFID 31
+#define INT_RFID 18
 #endif

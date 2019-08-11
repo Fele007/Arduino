@@ -19,22 +19,24 @@ RFID rfid(&segments);
 Buzzer buzzer(BUZZER);
 Gyro gyro;
 
-static Alarmanlage::state Alarmanlage::currentState = Alarmanlage::state::LOCKED;
+static volatile Alarmanlage::state Alarmanlage::currentState = Alarmanlage::state::LOCKED;
+
 
 void setup() {
 	// Initialization
 	Serial.begin(9600);
 	SPI.begin();
 	rfid.init();
+	gyro.initialize();
 	TimerBank.init(10);
 
 	// Shift Register
 	shiftRegister.setState(0b00000010);
 
 	// Timer+++++++++++++++++++++++++++++++++++++++++++++++++++
-	TimerBank.registerProcess(&segments, 5.0f);
-	TimerBank.registerProcess(&rfid, 500.0f);
-	TimerBank.registerProcess(&gyro, 10.0f);
+	TimerBank.registerProcess(&segments, 3.0f);
+	TimerBank.registerProcess(&rfid, 400.0f);
+	attachInterrupt(digitalPinToInterrupt(INT_RFID), Alarmanlage::ISR_Motion, RISING);
 }
 
 void loop() {
@@ -44,13 +46,19 @@ void loop() {
 		shiftRegister.setState(0b00000010);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::UNLOCKED) {
 		shiftRegister.setState(0b00100000);
-		rfid.init();
+		rfid.reset();
 		TimerBank.deRegisterProcess(&buzzer);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::LOCKED) {
+		//TimerBank.registerProcess(&gyro, 10.0f);
 		shiftRegister.setState(0b00000000);
 	} else if (Alarmanlage::currentState == Alarmanlage::state::DETECTED) {
 		segments.setCountdown(10);
 		shiftRegister.setState(0b00000010);
 	}
+}
+
+static void Alarmanlage::ISR_Motion () {
+	if (Alarmanlage::currentState == Alarmanlage::state::LOCKED)
+	Alarmanlage::currentState = Alarmanlage::state::DETECTED;
 }
 

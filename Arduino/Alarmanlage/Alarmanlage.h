@@ -11,7 +11,8 @@
 class Alarmanlage {
 public:
 	enum state {LOCKED, UNLOCKED, DETECTED, ALERT};
-	static state currentState;
+	static volatile state currentState;
+	static void ISR_Motion();
 };
 
 

@@ -18,6 +18,7 @@ public:
 	RFID(ISecurable* pISecurable...);
 	virtual ~RFID();
 	void init();
+	void reset();
 
 private:
 	MFRC522 device;

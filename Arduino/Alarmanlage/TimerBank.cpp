@@ -94,9 +94,10 @@ void TimerBankClass::offerInterrupt(ITimer *process) {
 			processes[i]->lastCycle = currentTime;
 			interrupts();
 			processes[i]->timerEvent();
+			break;
 		}
-		break;
 	}
+	interrupts();
 }
 
 TimerBankClass TimerBank;

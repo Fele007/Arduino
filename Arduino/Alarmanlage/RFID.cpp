@@ -15,7 +15,10 @@ RFID::~RFID() {
 }
 
 void RFID::init() {
-	device.PCD_Init(); //Initialization seems to cause problems
+	device.PCD_Init();
+}
+
+void RFID::reset() {
 	manipulation = false;
 }
 
