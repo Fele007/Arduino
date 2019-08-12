@@ -8,18 +8,15 @@
 #ifndef GYRO_H_
 #define GYRO_H_
 #include "Globals.h"
-#include "ITimer.h"
 #include "TinyMPU6050.h"
 
-class Gyro : public ITimer {
+class Gyro {
 public:
 	Gyro();
 	virtual ~Gyro();
 	void initialize();
 private:
 	MPU6050 device;
-	void timerEvent();
-	bool checkMovement();
 };
 
 #endif /* GYRO_H_ */
